@@ -7,12 +7,18 @@ import { postKey } from '../../apis/api';
 function MainPage() {
   const { data, mutate } = useMutation({
     mutationFn: postKey,
+    onSuccess: (_, value) => {
+      sessionStorage.setItem('admin-key', value);
+    },
+    onError: () => {
+      alert('누구냐 넌');
+    },
   });
-  const submit: React.FormEventHandler<HTMLFormElement> = e => {
-    e.preventDefault();
 
-    mutate('테스트');
+  const submit = (password: string) => {
+    mutate(password);
   };
+
   return (
     <Container>
       <Title>

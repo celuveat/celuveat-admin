@@ -1,16 +1,28 @@
+import { ChangeEvent, FormEvent, useRef } from 'react';
 import styled from 'styled-components';
 
 interface Props {
-  onSubmit: React.FormEventHandler<HTMLFormElement>;
+  onSubmit: (v: string) => void;
   type: React.HTMLInputTypeAttribute;
   placeholder?: string;
   buttonContent?: string;
 }
 
 function InputForm({ onSubmit, type, placeholder = '', buttonContent = '확인' }: Props) {
+  const ref = useRef<string>('');
+
+  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    onSubmit(ref.current);
+  };
+
+  const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    ref.current = e.target.value;
+  };
+
   return (
-    <Container onSubmit={onSubmit}>
-      <input type={type} placeholder={placeholder} />
+    <Container onSubmit={submitHandler}>
+      <input type={type} placeholder={placeholder} onChange={changeHandler} />
       <button type="submit">{buttonContent}</button>
     </Container>
   );
