@@ -1,21 +1,15 @@
 import Button from '../../_jeremylib/Button';
-import TextInput from '../../_jeremylib/TextInput';
 import { Container } from '../../components/@common/Container';
 import { Form } from '../../components/@common/Form';
+import TextInputSection from '../../components/TextInputSection';
 
 const RestaurantPage = () => {
   return (
     <Container>
       <h1>음식점 추가하기</h1>
       <Form>
-        <section>
-          <h3>유튜브 링크</h3>
-          <TextInput />
-        </section>
-        <section>
-          <h3>네이버 지도 링크</h3>
-          <TextInput />
-        </section>
+        <TextInputSection title="유튜브 링크" />
+        <TextInputSection title="네이버 지도 링크" />
         <Button type="submit">슛!</Button>
       </Form>
     </Container>
